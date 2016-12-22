@@ -1,0 +1,61 @@
+{
+    "Notes": "breww install gcc, brew install gdb, code sign it, brew install",
+    "name": "rmp",
+    "exportedEnvVars": {
+        "rmp_version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "1.2.0"
+        },
+        "rmp_installed": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "true"
+        },
+        "rmp_enable": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "enable"
+        },
+        "FINDLIB": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/lib"
+        },
+        "version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "1.2.0"
+        },
+        "PATH": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/bin"
+        }
+    },
+    "version": "1.2.0",
+    "dependencies": {
+        "@opam-alpha/containers": "*",
+        "@opam-alpha/oasis": ">= 0.4.0",
+        "@opam-alpha/ocamlfind": "*",
+        "@opam-alpha/menhir": "*",
+        "dependency-env": "*",
+        "substs": "https://github.com/yunxing/substs.git",
+        "@opam-alpha/ppx_deriving_yojson": ">= 2.0.0",
+        "@opam-alpha/cppo": "*",
+        "@opam-alpha/ppx_tools": ">= 0.99.1",
+        "@opam-alpha/extlib-compat": "*",
+        "@opam-alpha/lwt": ">= 2.4.6",
+        "nopam": "*",
+        "opam-installer-bin": "https://github.com/yunxing/opam-installer-bin.git",
+        "@opam-alpha/extlib": "*"
+    },
+    "scripts": {
+        "postinstall": "eval $(dependencyEnv) && nopam && ocaml setup.ml -configure --enable-build-rmp --prefix $opam_prefix && ocaml setup.ml -build && ocaml setup.ml -install && (opam-installer --prefix=$opam_prefix || true)"
+    },
+    "peerDependencies": {
+        "@opam-alpha/ocaml": ">= 4.02.0"
+    }
+}
